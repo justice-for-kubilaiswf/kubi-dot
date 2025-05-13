@@ -51,8 +51,15 @@ if [[ "$install_deps" == "y" || "$install_deps" == "Y" ]]; then
         echo -e "${YELLOW}[INFO]${NC} Qt uygulamaları için tema ayar paketlerini (qt5ct, qt6ct, kvantum) kurmak ister misiniz? (y/n)"
         read -r install_qt_theme_pkgs
         if [[ "$install_qt_theme_pkgs" == "y" || "$install_qt_theme_pkgs" == "Y" ]]; then
-            echo -e "${YELLOW}[INFO]${NC} qt5ct, qt6ct ve ilgili bağımlılıklar kuruluyor..."
-            sudo pacman -S --noconfirm --needed qt5ct qt6ct qt5-styleplugins qt6-styleplugins
+            echo -e "${YELLOW}[INFO]${NC} qt5ct, qt6ct kuruluyor..."
+            sudo pacman -S --noconfirm --needed qt5ct qt6ct
+
+            if [ -n "$AUR_HELPER" ]; then
+                echo -e "${YELLOW}[INFO]${NC} $AUR_HELPER ile qt5-styleplugins AUR paketi kuruluyor..."
+                $AUR_HELPER -S --noconfirm --needed qt5-styleplugins
+            else
+                echo -e "${YELLOW}[WARNING]${NC} AUR yardımcısı (yay/paru) bulunamadı. qt5-styleplugins manuel olarak kurulmalıdır (örn: yay -S qt5-styleplugins)."
+            fi
             
             echo -e "${YELLOW}[INFO]${NC} Kvantum tema motorunu kurmak ister misiniz? (y/n)"
             read -r install_kvantum
