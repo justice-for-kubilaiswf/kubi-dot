@@ -1,0 +1,133 @@
+;; Kubi Theme EWW Bar
+;; Modern, transparan ve şık tasarım
+
+;; Değişkenler
+(defvar eww "eww -c $HOME/.config/eww")
+(defvar volume_reveal false)
+(defvar wifi_reveal false)
+(defvar time_reveal false)
+(defvar power_reveal false)
+(defvar bright_reveal false)
+(defvar bat_reveal false)
+
+;; Polling Aralıkları
+(defpoll time :interval "1s" "date '+%H:%M'")
+(defpoll date :interval "1m" "date '+%d/%m/%y'")
+(defpoll battery :interval "10s" "scripts/battery.sh")
+(defpoll volume :interval "1s" "scripts/volume.sh")
+(defpoll bright :interval "1s" "scripts/brightness.sh")
+(defpoll wifi_icon :interval "3s" "scripts/wifi.sh --icon")
+(defpoll wifi_name :interval "3s" "scripts/wifi.sh --name")
+(defpoll workspace :interval "0.1s" "scripts/workspace.sh")
+
+;; Bar Widget
+(defwidget bar []
+  (centerbox :class "bar"
+    (left)
+    (center)
+    (right)))
+
+;; Sol Taraf Modülleri
+(defwidget left []
+  (box :class "left" :orientation "h" :space-evenly false :halign "start"
+    (menu)
+    (workspaces)))
+
+;; Orta Modüller
+(defwidget center []
+  (box :class "center" :orientation "h" :space-evenly false :halign "center"
+    (time_module)))
+
+;; Sağ Taraf Modülleri
+(defwidget right []
+  (box :class "right" :orientation "h" :space-evenly false :halign "end"
+    (wifi)
+    (volume_module)
+    (brightness)
+    (battery_module)
+    (power)))
+
+;; Menü Butonu
+(defwidget menu []
+  (eventbox :cursor "pointer"
+    (button :class "menu-icon" :onclick "scripts/launcher.sh" "󰣇")))
+
+;; Workspace Widget'ı
+(defwidget workspaces []
+  (box :class "workspaces-widget" :orientation "h" :space-evenly false
+    (literal :content workspace)))
+
+;; Zaman ve Tarih Modülü
+(defwidget time_module []
+  (eventbox :cursor "pointer" :onhover "${eww} update time_reveal=true" :onhoverlost "${eww} update time_reveal=false"
+    (box :class "time-module" :orientation "h" :space-evenly false
+      (label :class "time" :text time)
+      (revealer :transition "slideright" :reveal time_reveal :duration "350ms"
+        (box :class "date" 
+          (label :text " | ${date}"))))))
+
+;; WiFi Modülü
+(defwidget wifi []
+  (eventbox :cursor "pointer" :onhover "${eww} update wifi_reveal=true" :onhoverlost "${eww} update wifi_reveal=false" :onclick "scripts/launcher.sh wifi"
+    (box :class "wifi-module" :orientation "h" :space-evenly false
+      (label :class "wifi-icon" :text wifi_icon)
+      (revealer :transition "slideright" :reveal wifi_reveal :duration "350ms"
+        (label :class "wifi-text" :text wifi_name :limit-width 16)))))
+
+;; Ses Kontrolü Modülü
+(defwidget volume_module []
+  (eventbox :cursor "pointer" :onhover "${eww} update volume_reveal=true" :onhoverlost "${eww} update volume_reveal=false" :onclick "scripts/launcher.sh audio"
+    (box :class "volume-module" :orientation "h" :space-evenly false
+      (label :class "volume-icon" :text "󰕾")
+      (revealer :transition "slideright" :reveal volume_reveal :duration "350ms"
+        (scale :class "volume-scale" 
+               :value volume
+               :orientation "h" 
+               :tooltip "Ses: ${volume}%"
+               :max 101 
+               :min 0 
+               :onchange "pamixer --set-volume {}")))))
+
+;; Ekran Parlaklığı Modülü
+(defwidget brightness []
+  (eventbox :cursor "pointer" :onhover "${eww} update bright_reveal=true" :onhoverlost "${eww} update bright_reveal=false"
+    (box :class "brightness-module" :orientation "h" :space-evenly false
+      (label :class "brightness-icon" :text "󰃞")
+      (revealer :transition "slideright" :reveal bright_reveal :duration "350ms"
+        (scale :class "brightness-scale" 
+               :value bright
+               :orientation "h" 
+               :tooltip "Parlaklık: ${bright}%"
+               :max 101 
+               :min 0 
+               :onchange "brightnessctl set {}%")))))
+
+;; Pil Durumu Modülü
+(defwidget battery_module []
+  (eventbox :cursor "pointer" :onhover "${eww} update bat_reveal=true" :onhoverlost "${eww} update bat_reveal=false"
+    (box :class "battery-module" :orientation "h" :space-evenly false
+      (label :class "battery-icon" :text "󰁹")
+      (revealer :transition "slideright" :reveal bat_reveal :duration "350ms"
+        (label :class "battery-text" :text "${battery}%")))))
+
+;; Güç Modülü
+(defwidget power []
+  (eventbox :cursor "pointer" :onhover "${eww} update power_reveal=true" :onhoverlost "${eww} update power_reveal=false" :onclick "scripts/powermenu.sh"
+    (box :class "power-module" :orientation "h" :space-evenly false
+      (label :class "power-icon" :text "")
+      (revealer :transition "slideright" :reveal power_reveal :duration "350ms"
+        (label :class "power-text" :text "Güç")))))
+
+;; Ana Pencere Tanımı
+(defwindow bar
+  :monitor 0
+  :geometry (geometry :x "0px"
+                      :y "10px"
+                      :width "98%"
+                      :height "50px"
+                      :anchor "top center")
+  :stacking "fg"
+  :exclusive true
+  :focusable false
+  :windowtype "dock"
+  (bar)) 

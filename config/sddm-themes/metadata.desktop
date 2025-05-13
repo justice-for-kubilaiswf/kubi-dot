@@ -1,0 +1,16 @@
+[SddmGreeterTheme]
+Name=Neo-Futura
+Description=A futuristic iOS-style login theme
+Author=Kubi
+Copyright=(c) 2025
+License=GPL-3.0-or-later
+Type=sddm-theme
+Version=1.0
+Website=www.kubilaiswf.com
+Screenshot=preview.jpg
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations
+Email=kubilay.karacar@hotmail.com
+Theme-Id=neo-futura
+Theme-API=2.0

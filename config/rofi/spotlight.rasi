@@ -1,0 +1,135 @@
+* {
+    bg-col: #1e1a2e;
+    bg-col-light: #322c44;
+    border-col: #9d7cd8;
+    selected-col: #322c44;
+    accent: #9d7cd8;
+    fg-col: #e2d9f3;
+    fg-col2: #d484ff;
+    grey: #6e6a86;
+    width: 40%;
+}
+
+element-text, element-icon , mode-switcher {
+    background-color: inherit;
+    text-color: inherit;
+}
+
+window {
+    /* Spotlight benzeri yarı saydam arka plan */
+    background-color: @bg-col;
+    /* Yumuşak gölge efekti */
+    border: 0px;
+    border-radius: 16px;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+    /* Tam ortalama */
+    padding: 20px;
+    width: 40%;
+    x-offset: 0;
+    y-offset: 0;
+    /* Bulanıklaştırma için */
+    transparency: "real";
+    /* Backrop blur efekti - Hyprland destekler */
+    blur: true;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [inputbar, message, listview];
+    spacing: 15px;
+    padding: 0;
+}
+
+inputbar {
+    background-color: @bg-col-light;
+    border-radius: 12px;
+    padding: 8px 8px;
+    margin: 0;
+    children: [prompt, entry];
+    border: 1px;
+    border-color: @border-col;
+}
+
+prompt {
+    background-color: inherit;
+    padding: 0px 10px 0px 0px;
+    text-color: @accent;
+    font: "SF Pro Display Bold 14";
+}
+
+entry {
+    background-color: inherit;
+    padding: 2px;
+    placeholder: "Search";
+    placeholder-color: @grey;
+    text-color: @fg-col;
+    font: "SF Pro Display 14";
+}
+
+message {
+    border: 0px;
+    border-color: @border-col;
+    padding: 0px;
+    border-radius: 12px;
+    background-color: transparent;
+}
+
+textbox {
+    padding: 10px;
+    border-radius: 12px;
+    text-color: @fg-col;
+    background-color: @bg-col-light;
+    border: 1px;
+    border-color: @border-col;
+}
+
+listview {
+    border: 0px solid 0px 0px;
+    padding: 0;
+    margin: 0;
+    columns: 1;
+    background-color: transparent;
+    spacing: 5px;
+    dynamic: true;
+    cycle: false;
+    layout: vertical;
+    scrollbar: false;
+    lines: 6;
+}
+
+element {
+    border: 0;
+    border-radius: 12px;
+    padding: 10px;
+    background-color: transparent;
+}
+
+element normal.normal, element alternate.normal {
+    background-color: @bg-col-light;
+    text-color: @fg-col;
+}
+
+element selected.normal {
+    background-color: @selected-col;
+    text-color: @fg-col;
+    border: 0px;
+    border-color: @accent;
+}
+
+element-icon {
+    size: 24px;
+    padding: 0 10px 0 0;
+    cursor: pointer;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    highlight: bold;
+    cursor: pointer;
+    vertical-align: 0.5;
+}
+
+element normal.normal:hover, element alternate.normal:hover {
+    background-color: @selected-col;
+}

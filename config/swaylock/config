@@ -1,0 +1,40 @@
+# Görünüm ayarları
+image=~/.config/hypr/wallpapers/lockscreen.png
+scaling=fill
+color=1e1e2e
+
+# Gösterge (halka) ayarları
+indicator
+indicator-radius=150
+indicator-thickness=15
+indicator-caps-lock
+
+# Renk teması (mor-viyole)
+key-hl-color=9d7cd8
+bs-hl-color=b4befe
+inside-color=1e1e2eee
+inside-clear-color=1e1e2eee
+inside-ver-color=1e1e2eee
+inside-wrong-color=1e1e2eee
+
+ring-color=313244
+ring-clear-color=9d7cd8
+ring-ver-color=9d7cd8
+ring-wrong-color=f38ba8
+
+line-color=00000000
+line-clear-color=00000000
+line-ver-color=00000000
+line-wrong-color=00000000
+
+text-color=cdd6f4
+text-clear-color=cdd6f4
+text-ver-color=cdd6f4
+text-wrong-color=f38ba8
+
+# Efekt ayarları
+grace=0
+grace-no-mouse
+grace-no-touch
+fade-in=0.5
+ignore-empty-password 
