@@ -37,7 +37,8 @@ for cursor in "${BASIC_CURSORS[@]}"; do
     
     if [ -f "$cursor_file" ]; then
         echo -e "${GREEN}[OK]${NC} $cursor_file işleniyor... ($cursor_name)"
-        clickgen --png "$cursor_file" --out-name "$cursor_name" --out-dir Kubi-theme/cursors
+        # Arch Linux'un python-clickgen için doğru format
+        clickgen "$cursor_file" -x 10 -y 10 -s 22 24 32 -p x11 -o "Kubi-theme/cursors/$cursor_name"
     else
         echo -e "${YELLOW}[WARNING]${NC} $cursor_file bulunamadı, bu işaretçi atlanıyor."
     fi
@@ -81,7 +82,8 @@ if [ -f "normal.png" ]; then
     for cursor_type in "help" "cross" "pencil" "not-allowed" "no-drop"; do
         if [ ! -f "${cursor_type}.png" ] && [ ! -f "Kubi-theme/cursors/${cursor_type}" ]; then
             echo -e "${GREEN}[OK]${NC} normal.png'den $cursor_type oluşturuluyor..."
-            clickgen --png "normal.png" --out-name "$cursor_type" --out-dir Kubi-theme/cursors
+            # Arch Linux'un python-clickgen için doğru format
+            clickgen "normal.png" -x 10 -y 10 -s 22 24 32 -p x11 -o "Kubi-theme/cursors/$cursor_type"
         fi
     done
 fi
@@ -101,7 +103,11 @@ if ls wait*.png &> /dev/null; then
         mv "$frame" "wait-frames/wait-frame-$i.png"
         i=$((i+1))
     done
-    clickgen --frame-dir wait-frames --out-name "wait" --fps 20 --out-dir Kubi-theme/cursors
+    
+    # Arch Linux'un python-clickgen için doğru format - animasyon için
+    FRAMES=$(ls wait-frames/*.png | sort)
+    clickgen $FRAMES -d 3 -x 10 -y 10 -s 22 24 32 -p x11 -o "Kubi-theme/cursors/wait"
+    
     # Geçici dizini temizle
     rm -rf wait-frames
     
