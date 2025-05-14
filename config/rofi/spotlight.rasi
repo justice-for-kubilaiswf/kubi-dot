@@ -27,8 +27,6 @@ window {
     width: 40%;
     x-offset: 0;
     y-offset: 0;
-    /* Bulanıklaştırma için */
-    transparency: "real";
     /* Backrop blur efekti - Hyprland destekler */
     blur: true;
 }

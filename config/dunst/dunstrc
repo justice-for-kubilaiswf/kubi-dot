@@ -15,7 +15,7 @@
     progress_bar_max_width = 300
     
     indicate_hidden = yes
-    transparency = 0
+    transparency = 10
     separator_height = 2
     padding = 8
     horizontal_padding = 10
@@ -27,7 +27,7 @@
     idle_threshold = 120
     
     font = JetBrainsMono Nerd Font 10
-    line_height = 0
+    line_height = 1
     markup = full
     format = "<b>%s</b>\n%b"
     alignment = left

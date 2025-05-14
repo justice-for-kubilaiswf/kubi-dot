@@ -2,8 +2,11 @@
 Created by saimoom **/
 *{
 	all: unset;
+	font-family: "DaddyTimeMono NF";
+}
+
+.feather-icon {
 	font-family: feather;
-	font-family: DaddyTimeMono NF;
 }
 
 /** General **/
@@ -50,9 +53,10 @@ tooltip label {
 }
 
 .clock_time_class {
-    color: #bfc9db;
+    color: #E0E0FF;
+    font-size: 20px;
     font-weight: bold;
-    margin: 0px 5px 0px 0px;
+    margin: 0px 0px 0px 6px;
 }
 
 
@@ -82,9 +86,10 @@ tooltip label {
 
 
 .module_essid {
-    font-size: 18;
-    color: #9D7CD8;
-  margin: 0px 10px 0px 0px;
+    color: #A8B0FF;
+    font-size: 13px;
+    font-weight: bolder;
+    margin: 0px 6px 0px 0px;
 }
 .module-wif {
     font-size: 22;
@@ -443,4 +448,14 @@ color: #bfc9db;
     color: #38384d;
     font-size: 18;
 	margin : 0px 0px 0px 0px;
+}
+
+/* bar background, can be used in defwindow */
+.bar-background {
+  background-color: rgba(15, 15, 23, 0.95);  /* yarı saydamlık hissi */
+  backdrop-filter: blur(6px);               /* modern görünüm */
+  border: 1px solid #2d2d3d;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  border-radius: 12px;
+  // padding: 6px; /* This was in your basic suggestion, decide if you need it with the new styling */
 }
